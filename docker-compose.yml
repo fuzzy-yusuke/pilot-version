@@ -1,0 +1,107 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    build: ./image/postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydb
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:5.2
+    volumes:
+      - pgadmindata:/var/lib/pgadmin4/storage
+    environment:
+      PGADMIN_DEFAULT_EMAIL: youth_k0228@outlook.com
+      PGADMIN_DEFAULT_PASSWORD: chhagane
+      TZ: Asia/Tokyo
+    depends_on:
+      - postgres  
+    ports:
+      - "5050:80"
+
+  pgbouncer:
+    restart: always
+    image: pgbouncer/pgbouncer:1.10.0
+    depends_on:
+      - postgres 
+
+    # 設定値は下記を参照
+    # * Dockerイメージの環境変数: https://gitlab.com/aztek-io/pgbouncer-container/blob/master/entrypoint.sh
+    # * pgbouncer.iniの設定: https://pgbouncer.github.io/config.html
+    environment:
+      - DATABASES_USER=postgres
+      - DATABASES_PASSWORD=postgres
+      - DATABASES_NAME=mydb
+      - DATABASES_HOST=postgres
+      - DATABASES_PORT=5432
+      - PGBOUNCER_LISTEN_PORT=5432
+
+    # c.f.
+    # * https://about.gitlab.com/2017/10/02/scaling-the-gitlab-database/
+    # * https://gitlab.com/gitlab-org/omnibus-gitlab/blob/c7fda3c84dc57fafe830b3318d337c6fea68eae5/files/gitlab-cookbooks/gitlab-ee/attributes/default.rb#L159-261
+      - PGBOUNCER_DEFAULT_POOL_SIZE=100
+      - PGBOUNCER_RESERVE_POOL_SIZE=5
+      - PGBOUNCER_RESERVE_POOL_TIMEOUT=3
+      - PGBOUNCER_MAX_CLIENT_CONN=2048
+      - PGBOUNCER_POOL_MODE=transaction
+      - PGBOUNCER_SERVER_IDLE_TIMEOUT=30
+    healthcheck:
+      # pgbouncerが起動しきるまで待つ
+      # FIXME: できればPostgreSQLに接続可能になるまで待ちたいのだがpsqlが入っていないので厳しい
+      test: ps aux | grep -v grep | grep pgbouncer
+      interval: 1s
+      timeout: 5s
+      retries: 30
+      # FIXME: 念の為待つ
+      start_period: 30s
+
+  php:
+    build: ./docker/php
+    container_name: "php-fpm"
+    # ボリュームを設定する（ホスト側ディレクトリ:コンテナ側ボリュームの場所）
+    volumes:
+      - ./src:/var/www
+
+  nginx:
+    image: nginx:latest
+    container_name: "nginx_test"
+    # ポートフォワードの指定（ホスト側ポート：コンテナ側ポート）
+    ports:
+      - 80:80
+    # ボリュームを設定する（ホスト側ディレクトリ:コンテナ側ボリュームの場所）
+    volumes:
+      - ./src:/var/www
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    # サービスの依存関係を指定（nginxをphpに依存させる）
+    depends_on:
+      - php
+
+  node:
+    image: node:14.18-alpine
+    container_name: "node14.18-alpine"
+    # コンテナ内の標準出力とホストの出力を設定：trueを指定
+    tty: true
+    # ボリュームを設定する（ホスト側ディレクトリ:コンテナ側ボリュームの場所）
+    volumes:
+      - ./src:/var/www
+    # コンテナ起動後のカレントディレクトリを設定
+    working_dir: /var/www
+
+  mail:
+    image: mailhog/mailhog
+    container_name: "mailhog"
+    # ポートフォワードの指定（ホスト側ポート：コンテナ側ポート）
+    ports:
+      - 8025:8025
+
+volumes:
+  postgres:
+  pgadmindata:
