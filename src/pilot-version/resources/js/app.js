@@ -6,6 +6,15 @@
 
 import './bootstrap';
 import { createApp } from 'vue';
+import Car from './components/CarComponent.vue';
+import Contact from './components/ContactComponent.vue';
+import Dashboard from './components/DashboardComponent.vue';
+import DashboardSystem from './components/DashboardSystemComponent.vue';
+import Departments from './components/DepartmentsComponent.vue';
+import DrivingLogs from './components/DrivingLogsComponent.vue';
+import Login from './components/LoginComponent.vue';
+import LoginEx from './components/LoginExComponent.vue';
+import PdfInput from './components/PdfInputComponent.vue';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -13,7 +22,19 @@ import { createApp } from 'vue';
  * to use in your application's views. An example is included for you.
  */
 
-const app = createApp({});
+const app = createApp({
+    components: {
+        Car,
+        Contact,
+        Dashboard,
+        DashboardSystem,
+        Departments,
+        DrivingLogs,
+        Login,
+        LoginEx,
+        PdfInput
+    }
+});
 
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
