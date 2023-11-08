@@ -14,8 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('t_activity_logs', function (Blueprint $table) {
-            $table->id();
+            $table->mediumInteger('id')->generatedAs()->primary();
+            $table->foreignUuid('tenant_id');
+            $table->string('user_id', 10);
+            $table->text('activity_description');
+            $table->timestampTz('timestamp')->default(now());
+            $table->jsonb('json')->nullable();
             $table->timestamps();
+            $table->string('updated_by')->nullable();
+            $table->string('update_program')->nullable();
+            $table->integer('version')->nullable();
         });
     }
 

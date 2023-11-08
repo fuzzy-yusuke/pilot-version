@@ -14,8 +14,19 @@ return new class extends Migration
     public function up()
     {
         Schema::create('t_pdf_file_body', function (Blueprint $table) {
-            $table->id();
+            $table->foreignUuid('tenant_id')->nullable();
+            $table->uuid('pdf_id')->nullable();
+            $table->integer('body_id')->nullable();
+            $table->string('key')->nullable();
+            $table->text('value')->nullable();
+            $table->text('remarks1')->nullable();
+            $table->text('remarks2')->nullable();
             $table->timestamps();
+            $table->string('updated_by');
+            $table->string('update_program');
+            $table->integer('version')->nullable();
+
+            $table->primary(['tenant_id', 'pdf_id', 'body_id']);
         });
     }
 

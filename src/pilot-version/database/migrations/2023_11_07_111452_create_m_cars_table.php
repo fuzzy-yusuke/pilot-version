@@ -14,8 +14,20 @@ return new class extends Migration
     public function up()
     {
         Schema::create('m_cars', function (Blueprint $table) {
-            $table->id();
+            $table->foreignUuid('tenant_id');
+            $table->string('car_id', 10)->unique();
+            $table->string('car_type')->nullable();
+            $table->string('number_plate');
+            $table->string('manager')->nullable();
+            $table->date('start_date');
+            $table->date('end_date')->nullable();
+            $table->string('department_id');
             $table->timestamps();
+            $table->string('updated_by');
+            $table->string('update_program');
+            $table->integer('version')->nullable();
+
+            $table->primary(['tenant_id', 'car_id']);
         });
     }
 

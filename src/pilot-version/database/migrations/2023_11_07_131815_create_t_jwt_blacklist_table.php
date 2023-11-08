@@ -14,8 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('t_jwt_blacklist', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->mediumInteger('id')->generatedAs()->primary();
+            $table->string('jti');
+            $table->string('token', 1024);
+            $table->timestamp('expiry');
+            $table->timestamp('created_at')->nullable();
         });
     }
 

@@ -14,8 +14,21 @@ return new class extends Migration
     public function up()
     {
         Schema::create('t_pdf_file_headers', function (Blueprint $table) {
-            $table->id();
+            $table->foreignUuid('tenant_id')->nullable();
+            $table->uuid('pdf_id');
+            $table->string('file_name');
+            $table->timestamp('uploaded_at');
+            $table->jsonb('email_data');
+            $table->text('text_data');
+            $table->string('remarks1')->nullable();
+            $table->string('remarks2')->nullable();
+            $table->boolean('logical_deletion')->default(false);
             $table->timestamps();
+            $table->string('updated_by');
+            $table->string('update_program');
+            $table->integer('version')->nullable();
+
+            $table->primary(['tenant_id', 'pdf_id']);
         });
     }
 
