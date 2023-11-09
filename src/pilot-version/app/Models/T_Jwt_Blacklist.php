@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class T_Jwt_Blacklist extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'jti',
+        'token',
+        'expiry',
+    ];
 }

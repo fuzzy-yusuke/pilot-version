@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class T_Activity_Logs extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'activity_description',
+        'timestamp',
+        'json',
+    ];
 }
