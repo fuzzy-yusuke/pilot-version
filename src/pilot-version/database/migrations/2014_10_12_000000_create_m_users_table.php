@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('m_users', function (Blueprint $table) {
-            $table->id('tenant_id');
+            $table->foreignUuid('tenant_id');
             $table->string('user_id', 10);
             $table->string('user_name');
             $table->string('email')->unique();
@@ -22,12 +22,14 @@ return new class extends Migration
             $table->rememberToken();
             $table->string('department_id', 10);
             $table->boolean('role')->nullable();
-            $table->timestamp('start_date');
-            $table->timestamp('end_date')->nullable();
+            $table->date('start_date');
+            $table->date('end_date')->nullable();
             $table->timestamps();
             $table->string('updated_by');
             $table->string('update_program');
             $table->integer('version')->nullable();
+
+            $table->primary(['tenant_id', 'user_id']);
         });
     }
 
