@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'auth'], function () {
+    Route::post("login", [AuthController::class, 'login']);
+});
+
+// 認証ありで叩けるAPI
+Route::group(['prefix' => 'auth', 'middleware' => 'auth:api'], function () {
+    Route::get('me', [AuthController::class, 'me']);
 });
