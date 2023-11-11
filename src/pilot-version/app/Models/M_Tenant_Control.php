@@ -21,4 +21,10 @@ class M_Tenant_Control extends Model
         'address3',
         'Invoice_Issuer',
     ];
+
+    //外部キーの設定
+    public function m_tenants()
+    {
+        return $this->belongsTo(M_Tenants::class);
+    }
 }

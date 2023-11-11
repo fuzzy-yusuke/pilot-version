@@ -24,4 +24,10 @@ class T_Driving_Logs extends Model
         'post_alcohol_checker_id',
         'return_driver_id',
     ];
+
+    //外部キーの設定
+    public function m_tenants()
+    {
+        return $this->belongsTo(M_Tenants::class);
+    }
 }

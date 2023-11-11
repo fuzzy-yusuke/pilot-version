@@ -13,4 +13,10 @@ class T_Activity_Logs extends Model
         'timestamp',
         'json',
     ];
+
+    //外部キーの設定
+    public function m_tenants()
+    {
+        return $this->belongsTo(M_Tenants::class);
+    }
 }

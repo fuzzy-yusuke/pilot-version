@@ -14,4 +14,10 @@ class T_Pdf_File_Body extends Model
         'remarks1',
         'remarks2',
     ];
+
+    //外部キーの設定
+    public function m_tenants()
+    {
+        return $this->belongsTo(M_Tenants::class);
+    }
 }

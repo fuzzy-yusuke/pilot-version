@@ -17,4 +17,10 @@ class T_Pdf_File_Headers extends Model
         'remarks2',
         'logical_deletion',
     ];
+
+    //外部キーの設定
+    public function m_tenants()
+    {
+        return $this->belongsTo(M_Tenants::class);
+    }
 }

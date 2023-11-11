@@ -11,11 +11,11 @@ class M_System_Users extends Model
     protected $fillable = [
         'sys_user_name',
         'email',
-        'password_hash',
+        'password',
     ];
 
     protected $hidden = [
-        'password_hash',
+        'password',
         'remember_token',
     ];
 }

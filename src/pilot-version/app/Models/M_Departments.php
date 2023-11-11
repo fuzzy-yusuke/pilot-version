@@ -19,4 +19,10 @@ class M_Departments extends Model
         'start_date',
         'end_date',
     ];
+
+    //外部キーの設定
+    public function m_tenants()
+    {
+        return $this->belongsTo(M_Tenants::class);
+    }
 }

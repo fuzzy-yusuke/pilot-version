@@ -13,4 +13,10 @@ class T_Notifications extends Model
         'content',
         'is_read',
     ];
+
+    //外部キーの設定
+    public function m_tenants()
+    {
+        return $this->belongsTo(M_Tenants::class);
+    }
 }

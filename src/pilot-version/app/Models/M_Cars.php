@@ -16,4 +16,10 @@ class M_Cars extends Model
         'end_date',
         'department_id',
     ];
+
+    //外部キーの設定
+    public function m_tenants()
+    {
+        return $this->belongsTo(M_Tenants::class);
+    }
 }
