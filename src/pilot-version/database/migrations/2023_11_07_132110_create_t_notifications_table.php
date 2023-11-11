@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('t_notifications', function (Blueprint $table) {
-            $table->foreignUuid('tenant_id');
+            $table->foreignUuid('tenant_id')->constrained('m_tenants', 'tenant_id');
             $table->uuid('notification_id');
             $table->string('user_id', 10);
             $table->string('type', 50)->nullable();

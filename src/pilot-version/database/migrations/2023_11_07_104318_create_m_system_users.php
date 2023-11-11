@@ -17,7 +17,7 @@ return new class extends Migration
             $table->uuid('sys_user_id')->primary();
             $table->string('sys_user_name');
             $table->string('email')->unique();
-            $table->string('password_hash');
+            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
             $table->string('updated_by')->nullable();

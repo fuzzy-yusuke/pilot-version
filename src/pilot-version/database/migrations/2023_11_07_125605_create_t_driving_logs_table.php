@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('t_driving_logs', function (Blueprint $table) {
-            $table->foreignUuid('tenant_id');
+            $table->foreignUuid('tenant_id')->constrained('m_tenants', 'tenant_id');
             $table->uuid('log_id');
             $table->string('user_id', 10);
             $table->string('car_id', 10);

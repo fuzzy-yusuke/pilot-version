@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('t_activity_logs', function (Blueprint $table) {
             $table->mediumInteger('id')->generatedAs()->primary();
-            $table->foreignUuid('tenant_id');
+            $table->foreignUuid('tenant_id')->constrained('m_tenants', 'tenant_id');
             $table->string('user_id', 10);
             $table->text('activity_description');
             $table->timestampTz('timestamp')->default(now());

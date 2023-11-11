@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('m_tenant_control', function (Blueprint $table) {
-            $table->foreignUuid('tenant_id');
+            $table->foreignUuid('tenant_id')->constrained('m_tenants', 'tenant_id');
             $table->string('tenant_name1');
             $table->string('tenant_name2')->nullable();
             $table->date('processing_date');

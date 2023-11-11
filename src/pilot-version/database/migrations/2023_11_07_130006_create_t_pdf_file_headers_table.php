@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('t_pdf_file_headers', function (Blueprint $table) {
-            $table->foreignUuid('tenant_id')->nullable();
+            $table->foreignUuid('tenant_id')->nullable()->constrained('m_tenants', 'tenant_id');
             $table->uuid('pdf_id');
             $table->string('file_name');
             $table->timestamp('uploaded_at');

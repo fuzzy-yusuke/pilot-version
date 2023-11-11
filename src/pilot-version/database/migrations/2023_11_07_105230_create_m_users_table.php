@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('m_users', function (Blueprint $table) {
-            $table->foreignUuid('tenant_id');
+            $table->foreignUuid('tenant_id')->constrained('m_tenants', 'tenant_id');
             $table->string('user_id', 10);
             $table->string('user_name');
             $table->string('email')->unique();
-            $table->string('password_hash');
+            $table->string('password');
             $table->rememberToken();
             $table->string('department_id', 10);
             $table->boolean('role')->nullable();

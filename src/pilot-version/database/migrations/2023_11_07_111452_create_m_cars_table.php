@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('m_cars', function (Blueprint $table) {
-            $table->foreignUuid('tenant_id');
+            $table->foreignUuid('tenant_id')->constrained('m_tenants', 'tenant_id');
             $table->string('car_id', 10)->unique();
             $table->string('car_type')->nullable();
             $table->string('number_plate');
