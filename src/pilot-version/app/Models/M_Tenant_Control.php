@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class M_Tenant_Control extends Model
 {
     use HasFactory;
+    protected $table = 'm_tenant_control';
     protected $fillable = [
         'tenant_name1',
         'tenant_name2',

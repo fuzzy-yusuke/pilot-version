@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class T_Driving_Logs extends Model
 {
     use HasFactory;
+    protected $table = 't_driving_logs';
     protected $fillable = [
         'driving_date',
         'destination',

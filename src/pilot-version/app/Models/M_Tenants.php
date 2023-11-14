@@ -12,6 +12,7 @@ class M_Tenants extends Model
 
     use HasUuids;
 
+    protected $table = 'm_tenants';
     protected $primaryKey = 'tenant_id';
 
     protected $fillable = [

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class T_Activity_Logs extends Model
 {
     use HasFactory;
+    protected $table = 't_activity_logs';
     protected $fillable = [
         'activity_description',
         'timestamp',
