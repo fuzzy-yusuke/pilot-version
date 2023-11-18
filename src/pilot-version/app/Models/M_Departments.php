@@ -24,6 +24,6 @@ class M_Departments extends Model
     //外部キーの設定
     public function m_tenants()
     {
-        return $this->belongsTo(M_Tenants::class);
+        return $this->belongsTo(M_Tenants::class, 'tenant_id');
     }
 }

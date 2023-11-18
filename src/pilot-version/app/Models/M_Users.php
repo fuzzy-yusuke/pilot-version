@@ -2,20 +2,25 @@
 
 namespace App\Models;
 
-use App\Traits\HasCompositePrimaryKeyTrait;
+use App\Traits\HasCompositePrimaryKey;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\M_Users as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
+use Ramsey\Uuid\Uuid;
 
 class M_Users extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable, HasCompositePrimaryKeyTrait;
+    use HasApiTokens, HasFactory, Notifiable;
+    use  HasCompositePrimaryKey;
+    use HasUuids;
 
     protected $table = 'm_users';
     protected $primaryKey = ['tenant_id', 'user_id'];
+    protected $keyType = 'string';
     public $incrementing = false;
 
     /**
@@ -24,6 +29,8 @@ class M_Users extends Authenticatable implements JWTSubject
      * @var array<int, string>
      */
     protected $fillable = [
+        'tenant_id',
+        'user_id',
         'user_name',
         'email',
         'password',
@@ -39,14 +46,40 @@ class M_Users extends Authenticatable implements JWTSubject
         'remember_token',
     ];
 
+    //外部キーの設定
+    public function m_tenants()
+    {
+        return $this->belongsTo(M_Tenants::class, 'tenant_id');
+    }
+
+    /**
+     * モデルの新しいUUIDの生成
+     *
+     * @return string
+     */
+    public function newUniqueId()
+    {
+        return (string) Uuid::uuid4();
+    }
+
+    /**
+     * 一意の識別子を受け取るカラムの取得
+     *
+     * @return array
+     */
+    public function uniqueIds()
+    {
+        return ['tenant_id'];
+    }
+
     /**
      * The attributes that should be cast.
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        //'email_verified_at' => 'datetime',
-    ];
+    // protected $casts = [
+    //     'email_verified_at' => 'datetime',
+    // ];
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
@@ -55,7 +88,7 @@ class M_Users extends Authenticatable implements JWTSubject
      */
     public function getJWTIdentifier()
     {
-        return $this->getKey();
+        return $this->getEmailForVerification();
     }
 
     /**
@@ -66,11 +99,5 @@ class M_Users extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
-    }
-
-    //外部キーの設定
-    public function m_tenants()
-    {
-        return $this->belongsTo(M_Tenants::class);
     }
 }

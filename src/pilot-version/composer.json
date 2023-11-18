@@ -27,6 +27,7 @@
         "psr-4": {
             "App\\": "app/",
             "App\\Models\\": "app/Models/",
+            "App\\Trait\\": "app/Traits",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
