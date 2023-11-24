@@ -89,7 +89,7 @@ class M_Users extends Authenticatable implements JWTSubject
      */
     public function getJWTIdentifier()
     {
-        return $this->getEmailForVerification();
+        return $this->getKey();
     }
 
     /**
