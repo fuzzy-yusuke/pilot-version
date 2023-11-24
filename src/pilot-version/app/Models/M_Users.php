@@ -6,7 +6,7 @@ use App\Traits\HasCompositePrimaryKey;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\M_Users as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
@@ -19,7 +19,7 @@ class M_Users extends Authenticatable implements JWTSubject
     use HasUuids;
 
     protected $table = 'm_users';
-    protected $primaryKey = ['tenant_id', 'user_id'];
+    protected $primaryKey = 'user_id';
     protected $keyType = 'string';
     public $incrementing = false;
 
@@ -75,11 +75,12 @@ class M_Users extends Authenticatable implements JWTSubject
     /**
      * The attributes that should be cast.
      *
-     * @var array<string, string>
+     * @var array
      */
-    // protected $casts = [
-    //     'email_verified_at' => 'datetime',
-    // ];
+    protected $casts = [
+        'role' => 'boolean',
+        'options' => 'array',
+    ];
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('m_users', function (Blueprint $table) {
             $table->foreignUuid('tenant_id')->constrained('m_tenants', 'tenant_id');
-            $table->string('user_id', 10);
+            $table->string('user_id', 10)->primary();
             $table->string('user_name');
             $table->string('email')->unique();
             $table->string('password');
@@ -28,8 +28,6 @@ return new class extends Migration
             $table->string('updated_by');
             $table->string('update_program');
             $table->integer('version')->nullable();
-
-            $table->primary(['tenant_id', 'user_id']);
         });
     }
 
