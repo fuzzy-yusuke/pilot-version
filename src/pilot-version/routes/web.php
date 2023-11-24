@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
+//管理画面系・マイページ系のファイル呼び出し
+// include __DIR__ . '/m_system_user.php';
+// include __DIR__ . '/m_user.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -20,46 +26,3 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-/*
-システム管理者系ページ
-*/
-// システム管理者用ログイン
-Route::get(
-    '/system/login',
-    [App\Http\Controllers\LoginExController::class, 'loginex']
-)->name('system.loginex');
-// システム管理者用ダッシュボード
-Route::get(
-    '/system/dashboard',
-    [App\Http\Controllers\DashboardSystemController::class, 'dashboardsystem']
-)->name('system.dashboardsystem');
-
-/*
-テナントユーザー系ページ
-*/
-// テナントユーザー用ダッシュボード
-Route::get(
-    '/dashboard',
-    [App\Http\Controllers\DashboardController::class, 'dashboard']
-)->name('tenant.dashboard');
-// 自動車マスタ
-Route::get(
-    '/car',
-    [App\Http\Controllers\CarController::class, 'car']
-)->name('tenant.car');
-// 所属マスタ
-Route::get(
-    '/departments',
-    [App\Http\Controllers\DepartmentsController::class, 'departments']
-)->name('tenant.departments');
-// 運転日報
-Route::get(
-    '/drivinglogs',
-    [App\Http\Controllers\DrivingLogsController::class, 'drivinglogs']
-)->name('tenant.drivinglogs');
-// PDFデータ取り込み
-Route::post(
-    '/pdfinput',
-    [App\Http\Controllers\PdfInputController::class, 'pdfinput']
-)->name('tenant.pdfinput');

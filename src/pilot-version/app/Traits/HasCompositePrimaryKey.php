@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait HasCompositePrimaryKey
 {
+
     /**
      * Set the keys for a save update query.
      *
