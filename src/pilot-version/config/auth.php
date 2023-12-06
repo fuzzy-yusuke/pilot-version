@@ -47,10 +47,12 @@ return [
         'api' => [
             'driver' => 'jwt',
             'provider' => 'm_users',
+            'hash' => false,
         ],
         'admin-api' => [
             'driver' => 'jwt',
             'provider' => 'm_system_users',
+            'hash' => false,
         ],
     ],
 

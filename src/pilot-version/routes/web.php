@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 //管理画面系・マイページ系のファイル呼び出し
 // include __DIR__ . '/m_system_user.php';

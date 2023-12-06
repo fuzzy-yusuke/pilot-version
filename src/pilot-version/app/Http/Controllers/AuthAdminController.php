@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
 // use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Auth;
 use Validator;
-use Illuminate\Http\Request;
-use App\Models\M_Users;
+use App\Models\M_System_Users;
 // use Tymon\JWTAuth\Contracts\Validator;
 
-class AuthController extends Controller
+class AuthAdminController extends Controller
 {
     /**
      * Create a new AuthController instance.
@@ -20,7 +20,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        \Config::set('auth.defaults.guard', 'api');
+        \Config::set('auth.defaults.guard', 'admin-api');
     }
 
     /**
@@ -34,6 +34,7 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|string|min:6',
         ]);
+        logger()->debug($request);
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
@@ -60,7 +61,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        Auth::guard('api')->logout();
+        Auth::guard('admin-api')->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
     }
@@ -72,7 +73,7 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(Auth::guard('api')->refresh());
+        return $this->respondWithToken(Auth::guard('admin-api')->refresh());
     }
 
     /**

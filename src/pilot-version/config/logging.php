@@ -53,7 +53,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['single', 'errorlog'],
             'ignore_exceptions' => false,
         ],
 
@@ -107,6 +107,7 @@ return [
         'errorlog' => [
             'driver' => 'errorlog',
             'level' => env('LOG_LEVEL', 'debug'),
+            'path' => storage_path('logs/debug.log'),
         ],
 
         'null' => [
