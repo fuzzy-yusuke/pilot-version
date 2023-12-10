@@ -9,11 +9,12 @@ use App\Http\Controllers\Admin\HomeController;
 */
 // システム管理者用ログイン
 Route::get(
-    '/system/login',
-    [App\Http\Controllers\LoginExController::class, 'loginex']
-)->name('system.loginex');
-// システム管理者用ダッシュボード
-Route::get(
-    '/system/dashboard',
-    [App\Http\Controllers\DashboardSystemController::class, 'dashboardsystem']
-)->name('system.dashboardsystem');
+    'loginex',
+    [Admin\LoginController::class, 'index']
+)->name('admin.login.index');
+Route::post('loginex', [Admin\LoginController::class, 'login'])->name('admin.login.login');
+
+Route::prefix('admin')->group(function () {
+    Route::get('logout', [Admin\LoginController::class, 'logout'])->name('admin.login.logout');
+    Route::get('/', [Admin\IndexController::class, 'dashboard'])->name('admin.dashboard');
+});

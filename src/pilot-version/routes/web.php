@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 //管理画面系・マイページ系のファイル呼び出し
 // include __DIR__ . '/m_system_user.php';
-// include __DIR__ . '/m_user.php';
+include __DIR__ . '/m_user.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +21,3 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8 col-sm-12">
-            <div class="card mt-5">
-                <div class="card-header">{{ __('ログイン') }}</div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('管理者ログイン') }}</div>
                 <div class="logo" style="text-align: center;">
                     <img src="{{ asset('img/logo.png') }}" width="200" height="200" alt="ロゴ">
                 </div>
