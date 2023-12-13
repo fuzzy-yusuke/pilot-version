@@ -1,0 +1,55 @@
+html {
+    height: 100%;
+    margin: 0;
+}
+
+nav,
+main,
+aside {
+    flex: none;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+nav {
+    width: 20%;
+    background-color: #e0f7fa;
+}
+
+aside {
+    width: 20%;
+    background-color: #e0f7fa;
+}
+
+main {
+    width: 60%;
+    padding: 20px;
+}
+
+.nav-item a {
+    text-decoration: none;
+}
+
+.nav-item:hover .tooltip {
+    display: block;
+}
+
+
+
+/* メディアクエリを追加 */
+@media (max-width: 767px) {
+
+    nav,
+    main,
+    aside {
+        width: 100%;
+    }
+
+    .content {
+        flex-direction: column;
+    }
+}

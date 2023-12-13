@@ -1,12 +1,4 @@
 <template>
-    <div class="container">
-
-        <header>
-            <h2>ダッシュボード</h2>
-            <p>ようこそ、ユーザー名さん</p>
-            <button class="btn btn-secondary logout-btn">ログアウト</button> <!-- ボタンをヘッダーの外に移動 -->
-        </header>
-
         <div class="content">
             <nav>
                 <!-- Navigation items (if necessary) -->
@@ -107,7 +99,6 @@
         <footer>
             © 2023 nnpo
         </footer>
-    </div>
 </template>
 
 <script>

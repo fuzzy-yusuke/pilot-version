@@ -1,0 +1,60 @@
+html {
+    height: 100%;
+    margin: 0;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+header {
+    background-color: #f0f8ff;
+    padding: 10px;
+    /* パディングを減らしてヘッダーを狭くする */
+    text-align: center;
+    position: relative;
+    /* ポジショニングの基準を設定 */
+}
+
+.logout-btn {
+    position: absolute;
+    right: 0;
+    /* この部分を修正してボタンを右端に移動 */
+    top: 50%;
+    /* この部分を修正してボタンをヘッダーの中央に位置するように調整 */
+    transform: translateY(-50%);
+    /* この部分を追加してボタンをヘッダーの中央に位置するように調整 */
+    margin-right: 10px;
+    /* この部分を追加してボタンとヘッダーの右端との間にマージンを設定 */
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 12px;
+    display: none;
+}
+
+/* メディアクエリを追加 */
+@media (max-width: 767px) {
+
+    header {
+        padding: 10px;
+    }
+
+    .logout-btn {
+        position: fixed;
+        right: 10px;
+        top: 10px;
+        transform: none;
+    }
+}

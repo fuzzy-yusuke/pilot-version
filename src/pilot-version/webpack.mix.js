@@ -15,4 +15,10 @@ mix.js('resources/js/app.js', 'public/js').vue()
     .postCss('resources/css/app.css', 'public/css', [
         //
     ])
+    .postCss('resources/css/dashboard.css', 'public/css', [
+        //
+    ])
+    .postCss('resources/css/header.css', 'public/css', [
+        //
+    ])
     .sass('resources/sass/app.scss', 'public/css');
