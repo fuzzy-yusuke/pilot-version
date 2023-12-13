@@ -23,7 +23,7 @@
         <div id="header">
             <header>
                 <h2>ダッシュボード</h2>
-                <p>ようこそ、<span id="userName">ユーザー名</span>さん</p>
+                <p>ようこそ、{{ $user_name->user_name }}さん</p>
                 <form id="logout-button" method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button class="btn btn-secondary logout-btn" type="submit">ログアウト</button>
