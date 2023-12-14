@@ -13,8 +13,6 @@ import DashboardComponent from './components/DashboardComponent';
 // import DashboardSystem from './components/DashboardSystemComponent.vue';
 // import Departments from './components/DepartmentsComponent.vue';
 // import DrivingLogs from './components/DrivingLogsComponent.vue';
-// import Login from './components/LoginComponent.vue';
-// import LoginEx from './components/LoginExComponent.vue';
 // import PdfInput from './components/PdfInputComponent.vue';
 
 /**

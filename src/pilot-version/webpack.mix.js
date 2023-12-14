@@ -21,4 +21,7 @@ mix.js('resources/js/app.js', 'public/js').vue()
     .postCss('resources/css/header.css', 'public/css', [
         //
     ])
+    .postCss('resources/css/login_ex.css', 'public/css', [
+        //
+    ])
     .sass('resources/sass/app.scss', 'public/css');

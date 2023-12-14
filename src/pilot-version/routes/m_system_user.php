@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\LoginController;
-use App\Http\Controllers\Admin\HomeController;
 
 /*
 システム管理者系ページ
@@ -10,11 +8,11 @@ use App\Http\Controllers\Admin\HomeController;
 // システム管理者用ログイン
 Route::get(
     'loginex',
-    [Admin\LoginController::class, 'index']
-)->name('admin.login.index');
-Route::post('loginex', [Admin\LoginController::class, 'login'])->name('admin.login.login');
+    [App\Http\Controllers\Admin\LoginController::class, 'form']
+)->name('admin.login');
+Route::post('loginex', [App\Http\Controllers\Admin\LoginController::class, 'login']);
 
 Route::prefix('admin')->group(function () {
-    Route::get('logout', [Admin\LoginController::class, 'logout'])->name('admin.login.logout');
-    Route::get('/', [Admin\IndexController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('logout', [App\Http\Controllers\Admin\LoginController::class, 'logout'])->name('admin.login.logout');
+    Route::get('/dashboard', [App\Http\Controllers\Admin\IndexController::class, 'dashboard'])->name('admin.dashboard');
 });

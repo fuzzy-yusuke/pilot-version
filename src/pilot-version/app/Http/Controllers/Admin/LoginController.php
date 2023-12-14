@@ -5,12 +5,31 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
-    public function index()
+    use AuthenticatesUsers;
+    protected $redirectTo = '/admin/dashboard';
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        return view('admin.login.index');
+        $this->middleware('guest:admin-web')->except('logout');
+    }
+
+    protected function guard()
+    {
+        return Auth::guard('admin-web');
+    }
+
+    public function form()
+    {
+        return view('admin.login');
     }
 
     public function login(Request $request)
@@ -36,7 +55,7 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         // ログアウトしたらログインフォームにリダイレクト
-        return redirect()->route('admin.login.index')->with([
+        return redirect()->route('admin.login')->with([
             'logout_msg' => 'ログアウトしました',
         ]);
     }
