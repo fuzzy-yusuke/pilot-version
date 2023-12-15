@@ -5,15 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>管理者ログイン</title>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ mix('css/login_ex.css') }}">
 </head>
 
 <body>
-    <!-- システム名を追加 管理者用ログイン -->
     <h1>パイロット版</h1>
 
     <div class="login-container">
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('admin.login') }}">
             @csrf
 
             <div class="row mb-3">
@@ -44,29 +45,11 @@
                 </div>
             </div>
 
-            <div class="row mb-3">
-                <div class="col-md-6 offset-md-4">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                        <label class="form-check-label" for="remember">
-                            {{ __('ログイン情報を記憶する') }}
-                        </label>
-                    </div>
-                </div>
-            </div>
-
             <div class="row mb-0">
                 <div class="col-md-8 offset-md-4">
                     <button type="submit" class="btn btn-primary">
                         {{ __('ログイン') }}
                     </button>
-
-                    @if (Route::has('password.request'))
-                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                        {{ __('パスワードを忘れた方') }}
-                    </a>
-                    @endif
                 </div>
             </div>
         </form>

@@ -10,7 +10,7 @@ import { createApp } from 'vue';
 // import Car from './components/CarComponent.vue';
 // import Contact from './components/ContactComponent.vue';
 import DashboardComponent from './components/DashboardComponent';
-// import DashboardSystem from './components/DashboardSystemComponent.vue';
+import DashboardSystem from './components/DashboardSystemComponent.vue';
 // import Departments from './components/DepartmentsComponent.vue';
 // import DrivingLogs from './components/DrivingLogsComponent.vue';
 // import PdfInput from './components/PdfInputComponent.vue';
@@ -23,7 +23,8 @@ import DashboardComponent from './components/DashboardComponent';
 
 const app = createApp({
     components: {
-        "dashboard-component":DashboardComponent
+        "dashboard-component":DashboardComponent,
+        "dashboardsystem-component":DashboardSystem
     }
 });
 
