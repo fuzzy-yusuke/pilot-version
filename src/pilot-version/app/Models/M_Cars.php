@@ -9,6 +9,9 @@ class M_Cars extends Model
 {
     use HasFactory;
     protected $table = 'm_cars';
+    protected $primaryKey = ['tenant_id', 'car_id'];
+    protected $keyType = 'string';
+    public $incrementing = false;
     protected $fillable = [
         'car_type',
         'number_plate',

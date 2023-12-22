@@ -47,7 +47,7 @@
                         <div class="card-body">
                             <h5 class="card-title">自動車管理</h5>
                             <p class="card-text">システムで管理されている自動車情報を確認、編集します。</p>
-                            <a href="cars.html" class="btn btn-primary">詳細を見る</a>
+                            <a :href="car" class="btn btn-primary">詳細を見る</a>
                         </div>
                     </div>
 
@@ -104,6 +104,11 @@
 <script>
     export default {
         mounted() {
+    },
+    data(){
+        return{
+            car: '/car',
+        }
     }
     };
 </script>

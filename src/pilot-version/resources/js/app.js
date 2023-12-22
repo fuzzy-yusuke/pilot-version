@@ -7,7 +7,7 @@
 require('./bootstrap');
 
 import { createApp } from 'vue';
-// import Car from './components/CarComponent.vue';
+import Car from './components/CarComponent.vue';
 // import Contact from './components/ContactComponent.vue';
 import DashboardComponent from './components/DashboardComponent';
 import DashboardSystem from './components/DashboardSystemComponent.vue';
@@ -24,7 +24,8 @@ import DashboardSystem from './components/DashboardSystemComponent.vue';
 const app = createApp({
     components: {
         "dashboard-component":DashboardComponent,
-        "dashboardsystem-component":DashboardSystem
+        "dashboardsystem-component":DashboardSystem,
+        "car-component":Car
     }
 });
 
