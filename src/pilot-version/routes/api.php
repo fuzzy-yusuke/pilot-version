@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthAdminController;
-
+use App\Http\Controllers\CarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +40,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['jwt.role:admin-api', 'jwt.a
     Route::post('refresh', [AuthAdminController::class, 'refresh']);
     Route::get('me', [AuthAdminController::class, 'me']);
 });
+
+Route::get('getCarList', [CarController::class, 'index']);
