@@ -15,7 +15,7 @@
                 <tbody v-for="(car, index) in cars" :key="index">
                     <tr>
                         <th scope="row">{{ car.car_id }}</th>
-                        <td>{{ car.numberplate }}</td>
+                        <td>{{ car.number_plate }}</td>
                         <td>{{ car.car_type }}</td>
                         <td>{{ car.start_date }}</td>
                         <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editCarModal">編集</button> <button type="button" class="btn btn-danger btn-sm">削除</button></td>
