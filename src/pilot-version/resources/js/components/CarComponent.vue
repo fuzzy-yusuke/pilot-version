@@ -1,5 +1,5 @@
 <template>
-    <div class="container mt-5">
+    <div class="container mt-5"  v-for="(car, index) in cars" :key="index">
             <h2>自動車マスタ管理</h2>
 
             <table class="table table-striped mt-4">
@@ -12,20 +12,20 @@
                         <th scope="col">アクション</th>
                     </tr>
                 </thead>
-                <tbody v-for="(car, index) in cars" :key="index">
+                <tbody>
                     <tr>
                         <th scope="row">{{ car.car_id }}</th>
                         <td>{{ car.number_plate }}</td>
                         <td>{{ car.car_type }}</td>
                         <td>{{ car.start_date }}</td>
-                        <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editCarModal">編集</button> <button type="button" class="btn btn-danger btn-sm">削除</button></td>
+                        <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" :data-target="'#editCarModal' + index">編集</button>
+                            <button type="button" class="btn btn-danger btn-sm">削除</button></td>
                     </tr>
                 </tbody>
             </table>
-        </div>
 
         <!-- Edit Car Modal -->
-        <div class="modal fade" id="editCarModal" tabindex="-1" role="dialog" aria-labelledby="editCarModalLabel" aria-hidden="true">
+        <div class="modal fade" :id="'editCarModal' + index" tabindex="-1" role="dialog" aria-labelledby="editCarModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -37,30 +37,38 @@
                     <div class="modal-body">
                         <form>
                             <div class="form-group">
-                                <label for="carNumber">ナンバープレート</label>
-                                <input type="text" class="form-control" id="carNumber" value="11-22">
+                                <label for="number_plate">ナンバープレート</label>
+                                <input type="text" class="form-control" name="number_plate" v-model="car.number_plate" value="{{ old('number_plate') }}">
                             </div>
                             <div class="form-group">
-                                <label for="carType">車種</label>
-                                <input type="text" class="form-control" id="carType" value="トヨタ・プリウス">
+                                <label for="car_type">車種</label>
+                                <input type="text" class="form-control" name="car_type" v-model="car.car_type" value="{{ old('car_type') }}">
                             </div>
                             <div class="form-group">
-                                <label for="manufacturingYear">製造年</label>
-                                <input type="number" class="form-control" id="manufacturingYear" value="2015">
+                                <label for="start_date">製造年</label>
+                                <input type="date" class="form-control" name="start_date" v-model="car.start_date" value="{{ old('start_date') }}">
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
+                        <form method="post" action="{{ action('CarController@update', car.car_id) }}">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                        <button type="button" class="btn btn-primary">保存</button>
+                        <button type="submit" class="btn btn-primary">保存</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </template>
 
 <script>
 export default{
-    props:["cars"]
+    props: ["cars", "car"],
+    data(){
+        return{
+            car: {}
+        }
+    },
 }
 </script>

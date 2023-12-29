@@ -41,4 +41,4 @@ Route::group(['prefix' => 'admin', 'middleware' => ['jwt.role:admin-api', 'jwt.a
     Route::get('me', [AuthAdminController::class, 'me']);
 });
 
-Route::get('getCarList', [CarController::class, 'index']);
+Route::get('car', [CarController::class]);
