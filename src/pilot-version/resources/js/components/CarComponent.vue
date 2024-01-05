@@ -18,8 +18,15 @@
                         <td>{{ car.number_plate }}</td>
                         <td>{{ car.car_type }}</td>
                         <td>{{ car.start_date }}</td>
-                        <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" :data-target="'#editCarModal' + index">編集</button>
-                            <button type="button" class="btn btn-danger btn-sm">削除</button></td>
+                        <td>
+                            <form action="/car/delete" method="POST">
+                            <input type="hidden" name="_token" :value="csrf">
+                            <input type="hidden" name="_method" value="delete">
+                            <input type="hidden" name="car_id" :value="car.car_id">
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" :data-target="'#editCarModal' + index">編集</button>
+                            <button type="submit" class="btn btn-danger btn-sm">削除</button>
+                            </form>
+                        </td>
                     </tr>
                 </tbody>
             </table>

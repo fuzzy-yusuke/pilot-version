@@ -22,4 +22,10 @@ class CarController extends Controller
         ]);
         return redirect()->route('tenant.car');
     }
+
+    public function delete(Request $request)
+    {
+        M_Cars::where('car_id', $request->car_id)->delete();
+        return redirect()->route('tenant.car');
+    }
 }
