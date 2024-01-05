@@ -13,15 +13,13 @@ class CarController extends Controller
         return view('tenant.car', ['cars' => $cars]);
     }
 
-    public function edit(M_Cars $car)
+    public function update(Request $request)
     {
-        return view('tenant.car', ['car' => $car]);
-    }
-
-    public function update(Request $request, M_Cars $car)
-    {
-        $car->car = $request->car;
-        $car->save();
-        return redirect('tenant.car');
+        M_Cars::where('car_id', $request->car_id)->update([
+            'number_plate' => $request->number_plate,
+            'car_type' => $request->car_type,
+            'start_date' => $request->start_date
+        ]);
+        return redirect()->route('tenant.car');
     }
 }

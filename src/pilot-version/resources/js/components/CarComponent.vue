@@ -34,8 +34,10 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <form>
+                    <form action="/car/update" method="POST">
+                        <input type="hidden" name="_token" :value="csrf">
+                        <input type="hidden" name="car_id" :value="car.car_id">
+                        <div class="modal-body">
                             <div class="form-group">
                                 <label for="number_plate">ナンバープレート</label>
                                 <input type="text" class="form-control" name="number_plate" v-model="car.number_plate" value="{{ old('number_plate') }}">
@@ -48,14 +50,12 @@
                                 <label for="start_date">製造年</label>
                                 <input type="date" class="form-control" name="start_date" v-model="car.start_date" value="{{ old('start_date') }}">
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <form method="post" action="{{ action('CarController@update', car.car_id) }}">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                        <button type="submit" class="btn btn-primary">保存</button>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                            <button type="submit" class="btn btn-primary">保存</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -64,11 +64,15 @@
 
 <script>
 export default{
-    props: ["cars", "car"],
+    props: ["cars"],
     data(){
         return{
-            car: {}
+            car: [],
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            number_plate: "",
+            car_type: "",
+            start_date: "",
         }
     },
-}
+};
 </script>

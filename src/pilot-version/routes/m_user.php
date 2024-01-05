@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,6 +14,7 @@ Auth::routes();
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('tenant.dashboard');
 // 自動車マスタ
 Route::get('/car', [App\Http\Controllers\CarController::class, 'index'])->name('tenant.car');
+Route::post('/car/update', [App\Http\Controllers\CarController::class, 'update']);
 // // 所属マスタ
 // Route::get(
 //     '/departments',
