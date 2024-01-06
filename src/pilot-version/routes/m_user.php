@@ -16,11 +16,9 @@ Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])-
 Route::get('/car', [App\Http\Controllers\CarController::class, 'index'])->name('tenant.car');
 Route::post('/car/update', [App\Http\Controllers\CarController::class, 'update']);
 Route::delete('/car/delete', [App\Http\Controllers\CarController::class, 'delete']);
-// // 所属マスタ
-// Route::get(
-//     '/departments',
-//     [App\Http\Controllers\DepartmentsController::class, 'departments']
-// )->name('tenant.departments');
+// 所属マスタ
+Route::get('/department', [App\Http\Controllers\DepartmentController::class, 'index'])->name('tenant.department');
+
 // // 運転日報
 // Route::get(
 //     '/drivinglogs',

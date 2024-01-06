@@ -58,7 +58,7 @@
                         <div class="card-body">
                             <h5 class="card-title">所属管理</h5>
                             <p class="card-text">ユーザーの所属部署やチーム情報を管理します。</p>
-                            <a href="departments.html" class="btn btn-primary">詳細を見る</a>
+                            <a :href="department" class="btn btn-primary">詳細を見る</a>
                         </div>
                     </div>
 
@@ -108,6 +108,7 @@
     data(){
         return{
             car: '/car',
+            department: '/department',
         }
     }
     };
