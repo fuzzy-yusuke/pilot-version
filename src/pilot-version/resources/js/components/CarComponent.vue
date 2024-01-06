@@ -1,5 +1,5 @@
 <template>
-    <div class="container mt-5"  v-for="(car, index) in cars" :key="index">
+    <div class="container mt-5">
             <h2>自動車マスタ管理</h2>
 
             <table class="table table-striped mt-4">
@@ -13,7 +13,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr v-for="(car, index) in cars" :key="index">
                         <th scope="row">{{ car.car_id }}</th>
                         <td>{{ car.number_plate }}</td>
                         <td>{{ car.car_type }}</td>
@@ -23,7 +23,7 @@
                             <input type="hidden" name="_token" :value="csrf">
                             <input type="hidden" name="_method" value="delete">
                             <input type="hidden" name="car_id" :value="car.car_id">
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" :data-target="'#editCarModal' + index">編集</button>
+                            <button type="button" v-on:click="showEditModal(index)" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editCarModal">編集</button>
                             <button type="submit" class="btn btn-danger btn-sm">削除</button>
                             </form>
                         </td>
@@ -32,7 +32,7 @@
             </table>
 
         <!-- Edit Car Modal -->
-        <div class="modal fade" :id="'editCarModal' + index" tabindex="-1" role="dialog" aria-labelledby="editCarModalLabel" aria-hidden="true">
+        <div class="modal fade" id="editCarModal" tabindex="-1" role="dialog" aria-labelledby="editCarModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -43,19 +43,19 @@
                     </div>
                     <form action="/car/update" method="POST">
                         <input type="hidden" name="_token" :value="csrf">
-                        <input type="hidden" name="car_id" :value="car.car_id">
+                        <input type="hidden" name="car_id" v-model="car_id">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="number_plate">ナンバープレート</label>
-                                <input type="text" class="form-control" name="number_plate" v-model="car.number_plate" value="{{ old('number_plate') }}">
+                                <input type="text" class="form-control" name="number_plate" v-model="number_plate">
                             </div>
                             <div class="form-group">
                                 <label for="car_type">車種</label>
-                                <input type="text" class="form-control" name="car_type" v-model="car.car_type" value="{{ old('car_type') }}">
+                                <input type="text" class="form-control" name="car_type" v-model="car_type">
                             </div>
                             <div class="form-group">
                                 <label for="start_date">製造年</label>
-                                <input type="date" class="form-control" name="start_date" v-model="car.start_date" value="{{ old('start_date') }}">
+                                <input type="date" class="form-control" name="start_date" v-model="start_date">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -76,10 +76,20 @@ export default{
         return{
             car: [],
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            car_id: "",
             number_plate: "",
             car_type: "",
             start_date: "",
         }
     },
+    methods: {
+        showEditModal(index) {
+            console.log("showEditModal:" + index);
+            this.car_id = this.cars[index].car_id;
+            this.number_plate = this.cars[index].number_plate;
+            this.car_type = this.cars[index].car_type;
+            this.start_date = this.cars[index].start_date;
+        }
+    }
 };
 </script>
