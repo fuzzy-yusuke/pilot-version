@@ -113,6 +113,7 @@
                     </div>
                     <form action="/department/update" method="POST">
                         <input type="hidden" name="_token" :value="csrf">
+                        <input type="hidden" name="department_id" v-model="department_id">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="department_id">所属ID</label>
@@ -121,6 +122,42 @@
                             <div class="form-group">
                                 <label for="department_name">所属名</label>
                                 <input type="text" class="form-control" name="department_name" v-model="department_name">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone_number">電話番号</label>
+                                <input type="text" class="form-control" name="phone_number" v-model="phone_number">
+                            </div>
+                            <div class="form-group">
+                                <label for="fax_number">FAX番号</label>
+                                <input type="text" class="form-control" name="fax_number" v-model="fax_number">
+                            </div>
+                            <div class="form-group">
+                                <label for="postal_code">郵便番号</label>
+                                <input type="text" class="form-control" name="postal_code" v-model="postal_code">
+                            </div>
+                            <div class="form-group">
+                                <label for="address1">住所1</label>
+                                <input type="text" class="form-control" name="address1" v-model="address1">
+                            </div>
+                            <div class="form-group">
+                                <label for="address2">住所2</label>
+                                <input type="text" class="form-control" name="address2" v-model="address2">
+                            </div>
+                            <div class="form-group">
+                                <label for="address3">住所3</label>
+                                <input type="text" class="form-control" name="address3" v-model="address3">
+                            </div>
+                            <div class="form-group">
+                                <label for="start_date">開始日</label>
+                                <input type="date" class="form-control" name="start_date" v-model="start_date">
+                            </div>
+                            <div class="form-group">
+                                <label for="end_date">終了日</label>
+                                <input type="date" class="form-control" name="end_date" v-model="end_date">
+                            </div>
+                            <div class="form-group">
+                                <label for="update_program">更新プログラム</label>
+                                <input type="text" class="form-control" name="update_program" v-model="update_program">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -143,6 +180,15 @@ export default {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             department_id: '',
             department_name: '',
+            phone_number: '',
+            fax_number: '',
+            postal_code: '',
+            address1: '',
+            address2: '',
+            address3: '',
+            start_date: '',
+            end_date: '',
+            update_program: '',
         }
     },
     methods:{
@@ -150,6 +196,15 @@ export default {
             console.log("showEditModal:" + index);
             this.department_id = this.departments[index].department_id;
             this.department_name = this.departments[index].department_name;
+            this.phone_number = this.departments[index].phone_number;
+            this.fax_number = this.departments[index].fax_number;
+            this.postal_code = this.departments[index].postal_code;
+            this.address1 = this.departments[index].address1;
+            this.address2 = this.departments[index].address2;
+            this.address3 = this.departments[index].address3;
+            this.start_date = this.departments[index].start_date;
+            this.end_date = this.departments[index].end_date;
+            this.update_program = this.departments[index].update_program;
         }
     }
 };
