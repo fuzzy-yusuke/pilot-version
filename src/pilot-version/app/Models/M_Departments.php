@@ -9,6 +9,9 @@ class M_Departments extends Model
 {
     use HasFactory;
     protected $table = 'm_departments';
+    protected $primaryKey = ['tenant_id', 'department_id'];
+    protected $keyType = 'string';
+    public $incrementing = false;
     protected $fillable = [
         'department_name',
         'phone_number',

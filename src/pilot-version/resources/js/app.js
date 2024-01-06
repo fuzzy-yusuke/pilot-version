@@ -11,7 +11,7 @@ import Car from './components/CarComponent.vue';
 // import Contact from './components/ContactComponent.vue';
 import DashboardComponent from './components/DashboardComponent';
 import DashboardSystem from './components/DashboardSystemComponent.vue';
-// import Departments from './components/DepartmentsComponent.vue';
+import Department from './components/DepartmentComponent.vue';
 // import DrivingLogs from './components/DrivingLogsComponent.vue';
 // import PdfInput from './components/PdfInputComponent.vue';
 
@@ -25,7 +25,8 @@ const app = createApp({
     components: {
         "dashboard-component":DashboardComponent,
         "dashboardsystem-component":DashboardSystem,
-        "car-component":Car
+        "car-component":Car,
+        "department-component" :Department
     }
 });
 

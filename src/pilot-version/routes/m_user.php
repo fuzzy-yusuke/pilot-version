@@ -18,7 +18,8 @@ Route::post('/car/update', [App\Http\Controllers\CarController::class, 'update']
 Route::delete('/car/delete', [App\Http\Controllers\CarController::class, 'delete']);
 // 所属マスタ
 Route::get('/department', [App\Http\Controllers\DepartmentController::class, 'index'])->name('tenant.department');
-
+Route::post('/department/create', [App\Http\Controllers\DepartmentController::class, 'create']);
+Route::post('/department/update', [App\Http\Controllers\DepartmentController::class, 'update']);
 // // 運転日報
 // Route::get(
 //     '/drivinglogs',
