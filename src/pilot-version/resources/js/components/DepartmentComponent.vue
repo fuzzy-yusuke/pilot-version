@@ -1,7 +1,10 @@
 <template>
     <div class="container mt-5">
         <h2>所属マスタ管理</h2>
-
+        <form  action="/department" method="get">
+            <input type="text" name="keyword">
+            <button type="submit" class="btn btn-primary btn-sm">検索</button>
+        </form>
         <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addDepartmentModal">新規追加</button>
 
         <table class="table table-striped">

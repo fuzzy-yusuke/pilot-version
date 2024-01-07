@@ -8,9 +8,22 @@ use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $departments = M_Departments::all();
+        $index = M_Departments::query();
+        $keyword = $request->input('keyword');
+        if (!empty($keyword)) {
+            $departments = $index->where(function ($query) use ($keyword) {
+                $query->where('department_name', 'LIKE', "%{$keyword}%")
+                    ->orWhere('parent_department_id', 'LIKE', "%{$keyword}%")
+                    ->orWhere('phone_number', 'LIKE', "%{$keyword}%")
+                    ->orWhere('address1', 'LIKE', "%{$keyword}%")
+                    ->orWhere('address2', 'LIKE', "%{$keyword}%")
+                    ->orWhere('address3', 'LIKE', "%{$keyword}%");
+            })->get();
+        } else {
+            $departments = M_Departments::all();
+        }
         return view('tenant.department', ['departments' => $departments]);
     }
 
