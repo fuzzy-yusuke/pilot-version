@@ -7,7 +7,7 @@
 
     <body>
         @csrf
-        <car-component :cars="{{ $cars }}"></car-component>
+        <car-component :cars="{{ $cars }}" :departments="{{ $departments }}"></car-component>
     </body>
 </div>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
