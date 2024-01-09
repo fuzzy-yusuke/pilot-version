@@ -52,7 +52,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="department_id">所属ID</label>
-                                <input type="text" class="form-control" name="department_id" v-model="department_id" required>
+                                <input type="text" class="form-control" name="department_id" required>
                             </div>
                             <div class="form-group">
                                 <label for="department_name">所属名</label>
