@@ -29,7 +29,7 @@
                         <td>{{ car.start_date }}</td>
                         <td>{{ car.end_date }}</td>
                         <td>
-                            <form action="/car/delete" method="POST">
+                            <form action="/car/delete" method="POST" @submit="submit(index)">
                             <input type="hidden" name="_token" :value="csrf">
                             <input type="hidden" name="car_id" :value="car.car_id">
                             <button type="button" v-on:click="showEditModal(index)" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editCarModal">編集</button>
@@ -191,6 +191,10 @@ export default{
             this.start_date = this.cars[index].start_date;
             this.end_date = this.cars[index].end_date;
             this.update_program = this.cars[index].update_program;
+        },
+        submit(index) {
+            const ans = confirm(this.cars[index].car_type + 'を削除しますか。');
+            if (!ans) event.preventDefault();
         }
     }
 };
