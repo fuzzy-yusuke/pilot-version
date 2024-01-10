@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 テナントユーザー系ページ
 */
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 // テナントユーザー用ダッシュボード
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('tenant.dashboard');
