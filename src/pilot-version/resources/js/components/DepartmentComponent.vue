@@ -30,8 +30,13 @@
                     <td>{{ department.update_program }}</td>
                     <td>{{ department.version }}</td>
                     <td>
+                        <form action="/department/delete" method="POST" @submit="submit(index)">
+                        <input type="hidden" name="_token" :value="csrf">
+                        <input type="hidden" name="department_id" :value="department.department_id">
                         <button v-on:click="showEditModal(index)" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editDepartmentModal">編集</button>
                         <button v-on:click="showNewModal(index)" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addDepartmentModal">複写</button>
+                        <button type="submit" class="btn btn-danger btn-sm">削除</button>
+                        </form>
                     </td>
                 </tr>
             </tbody>
@@ -236,6 +241,10 @@ export default {
             this.start_date = this.departments[index].start_date;
             this.end_date = this.departments[index].end_date;
             this.update_program = this.departments[index].update_program;
+        },
+        submit(index){
+            const ans = confirm(this.departments[index].department_name + 'を削除しますか。');
+            if(!ans) event.preventDefault();
         }
     }
 };

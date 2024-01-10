@@ -66,4 +66,10 @@ class DepartmentController extends Controller
         ]);
         return redirect()->route('tenant.department');
     }
+
+    public function delete(Request $request)
+    {
+        M_Departments::where('department_id', $request->department_id)->delete();
+        return redirect()->route('tenant.department');
+    }
 }
