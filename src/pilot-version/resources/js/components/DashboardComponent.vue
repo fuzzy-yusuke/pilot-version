@@ -36,7 +36,7 @@
                         <div class="card-body">
                             <h5 class="card-title">ユーザー管理</h5>
                             <p class="card-text">システムのユーザー情報を管理します。</p>
-                            <a href="users.html" class="btn btn-primary">詳細を見る</a>
+                            <a :href="user" class="btn btn-primary">詳細を見る</a>
                         </div>
                     </div>
 
@@ -109,6 +109,7 @@
         return{
             car: '/car',
             department: '/department',
+            user: '/user',
         }
     }
     };
