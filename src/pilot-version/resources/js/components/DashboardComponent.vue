@@ -14,7 +14,7 @@
                         <div class="card-body">
                             <h5 class="card-title">最新の報告</h5>
                             <p class="card-text">報告日: 2023-10-15</p>
-                            <a href="#" class="btn btn-primary">報告を見る</a>
+                            <a :href=drivinglog class="btn btn-primary">報告を見る</a>
                         </div>
                     </div>
 
@@ -110,6 +110,7 @@
             car: '/car',
             department: '/department',
             user: '/user',
+            drivinglog: '/drivinglog',
         }
     }
     };

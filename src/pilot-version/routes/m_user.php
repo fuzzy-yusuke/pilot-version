@@ -26,11 +26,11 @@ Route::get('/department', [App\Http\Controllers\DepartmentController::class, 'in
 Route::post('/department/create', [App\Http\Controllers\DepartmentController::class, 'create']);
 Route::post('/department/update', [App\Http\Controllers\DepartmentController::class, 'update']);
 Route::post('/department/delete', [App\Http\Controllers\DepartmentController::class, 'delete']);
-// // 運転日報
-// Route::get(
-//     '/drivinglogs',
-//     [App\Http\Controllers\DrivingLogsController::class, 'drivinglogs']
-// )->name('tenant.drivinglogs');
+// 運転日報
+Route::get('/drivinglog', [App\Http\Controllers\DrivingLogController::class, 'index'])->name('tenant.drivinglog');
+Route::post('/drivinglog/create', [App\Http\Controllers\DrivingLogController::class, 'create']);
+Route::post('/drivinglog/update', [App\Http\Controllers\DrivingLogController::class, 'update']);
+Route::post('/drivinglog/delete', [App\Http\Controllers\DrivingLogController::class, 'delete']);
 // // PDFデータ取り込み
 // Route::post(
 //     '/pdfinput',
