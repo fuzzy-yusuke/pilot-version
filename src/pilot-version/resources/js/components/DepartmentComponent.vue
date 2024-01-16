@@ -33,8 +33,8 @@
                         <form action="/department/delete" method="POST" @submit="submit(index)">
                         <input type="hidden" name="_token" :value="csrf">
                         <input type="hidden" name="department_id" :value="department.department_id">
-                        <button v-on:click="showEditModal(index)" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editDepartmentModal">編集</button>
-                        <button v-on:click="showNewModal(index)" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addDepartmentModal">複写</button>
+                        <button type="button" v-on:click="showEditModal(index)" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editDepartmentModal">編集</button>
+                        <button type="button" v-on:click="showNewModal(index)" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addDepartmentModal">複写</button>
                         <button type="submit" class="btn btn-danger btn-sm">削除</button>
                         </form>
                     </td>
