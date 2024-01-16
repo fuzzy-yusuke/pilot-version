@@ -65,7 +65,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="phone_number">ユーザー名</label>
+                                <label for="user_name">ユーザー名</label>
                                 <input type="text" class="form-control" name="user_name" v-model="user_name" required>
                             </div>
                             <div class="form-group">
