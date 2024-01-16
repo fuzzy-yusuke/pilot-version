@@ -12,8 +12,9 @@ import Car from './components/CarComponent.vue';
 import DashboardComponent from './components/DashboardComponent';
 import DashboardSystem from './components/DashboardSystemComponent.vue';
 import Department from './components/DepartmentComponent.vue';
-// import DrivingLogs from './components/DrivingLogsComponent.vue';
+import DrivingLog from './components/DrivingLogComponent.vue';
 // import PdfInput from './components/PdfInputComponent.vue';
+import User from './components/UserComponent.vue';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -26,7 +27,9 @@ const app = createApp({
         "dashboard-component":DashboardComponent,
         "dashboardsystem-component":DashboardSystem,
         "car-component":Car,
-        "department-component" :Department
+        "department-component" :Department,
+        "drivinglog-component" :DrivingLog,
+        "user-component" :User,
     }
 });
 
