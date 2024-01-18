@@ -6,8 +6,8 @@ use App\Models\M_Cars;
 use App\Models\T_Driving_Logs;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Models\M_Departments;
 use App\Models\M_Users;
+use Illuminate\Support\Str;
 
 class DrivingLogController extends Controller
 {
@@ -16,7 +16,7 @@ class DrivingLogController extends Controller
     {
         $cars = M_Cars::all();
         $user = Auth::user();
-        $users = M_Users::all();
+        $members = M_Users::all();
         $index = T_Driving_Logs::query();
         $keyword = $request->input('keyword');
         if (!empty($keyword)) {
@@ -31,24 +31,33 @@ class DrivingLogController extends Controller
         }
         return view(
             'tenant.drivinglog',
-            ['drivinglogs' => $drivinglogs, 'cars' => $cars, 'user' => $user, 'users' => $users]
+            ['drivinglogs' => $drivinglogs, 'cars' => $cars, 'user' => $user, 'members' => $members]
         );
     }
 
     public function create(Request $request)
     {
-        $car = new T_Driving_Logs();
+        $drivinglogs = new T_Driving_Logs();
         $user = Auth::user();
-        $car->tenant_id = $user->tenant_id;
-        $car->car_id = $request->car_id;
-        $car->department_id = $request->department_id;
-        $car->car_type = $request->car_type;
-        $car->number_plate = $request->number_plate;
-        $car->start_date = $request->start_date;
-        $car->end_date = $request->end_date;
-        $car->updated_by = $user->user_name;
-        $car->update_program = $request->update_program;
-        $car->save();
+        $drivinglogs->tenant_id = $user->tenant_id;
+        $drivinglogs->log_id = (string)Str::uuid();
+        $drivinglogs->user_id = M_Users::select('user_id')->where('user_name', $request->user_name)->get();
+        $drivinglogs->car_id = $request->car_id;
+        $drivinglogs->driving_date = $request->driving_date;
+        $drivinglogs->license_confirmation = $request->license_confirmation;
+        $drivinglogs->departure_time = $request->departure_time;
+        $drivinglogs->arrival_time = $request->arrival_time;
+        $drivinglogs->destination = $request->destination;
+        $drivinglogs->start_mileage = $request->start_mileage;
+        $drivinglogs->end_mileage = $request->end_mileage;
+        $drivinglogs->fuel = $request->fuel;
+        $drivinglogs->pre_alcohol_checker_id = $request->pre_alcohol_checker_id;
+        $drivinglogs->pre_alcohol_check = $request->pre_alcohol_check;
+        $drivinglogs->post_alcohol_checker_id = $request->post_alcohol_checker_id;
+        $drivinglogs->post_alcohol_check = $request->post_alcohol_check;
+        $drivinglogs->updated_by = $user->user_name;
+        $drivinglogs->update_program = $request->update_program;
+        $drivinglogs->save();
         return redirect()->route('tenant.drivinglog');
     }
 

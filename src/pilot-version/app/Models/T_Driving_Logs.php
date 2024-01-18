@@ -9,6 +9,9 @@ class T_Driving_Logs extends Model
 {
     use HasFactory;
     protected $table = 't_driving_logs';
+    protected $primaryKey = ['tenant_id', 'log_id'];
+    protected $keyType = 'string';
+    public $incrementing = false;
     protected $fillable = [
         'driving_date',
         'destination',
