@@ -23,12 +23,13 @@
                     <tr v-for="(drivinglog, index) in drivinglogs" :key="index">
                         <!-- 運転日報データのサンプル表示 -->
                         <td>{{ drivinglog.updated_at }}</td>
-                        <td>{{ drivinglog.user_name }}</td>
-                        <td>{{ drivinglog.car_type }}</td>
+                        <td>{{ drivinglog.user_id }}</td>
+                        <td>{{ drivinglog.car_id }}</td>
                         <td>{{ drivinglog.destination }}</td>
                         <td>{{ drivinglog.departure_time }}</td>
                         <td>{{ drivinglog.arrival_time }}</td>
-                        <td>{{ drivinglog.license_confirmation }}</td>
+                        <td v-if="drivinglog.license_confirmation == true">確認済み</td>
+                        <td v-else>未確認</td>
                         <td>
                             <form action="/drivinglog/delete" method="POST" @submit="submit(index)">
                             <input type="hidden" name="_token" :value="csrf">
@@ -61,7 +62,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="user_id">運転手</label>
-                                <input type="text" class="form-control" name="user_id" v-model="user['user_name']" required>
+                                <select class="form-select" name="user_id" v-model="user['user_id']" required>
+                                    <option v-for="member in members" :value="member.user_id">
+                                        {{ member.user_name }}
+                                    </option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="car_type">営業車</label>
