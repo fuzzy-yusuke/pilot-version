@@ -34,4 +34,16 @@ class T_Driving_Logs extends Model
     {
         return $this->belongsTo(M_Tenants::class, 'tenant_id');
     }
+
+    //ユーザーテーブルの設定
+    public function m_users()
+    {
+        return $this->belongsTo(M_Users::class, 'user_id');
+    }
+
+    //営業車テーブルの設定
+    public function m_cars()
+    {
+        return $this->belongsTo(M_Cars::class, 'car_id');
+    }
 }
