@@ -93,7 +93,7 @@
                                 <input type="datetime-local" class="form-control" name="arrival_time" required>
                             </div>
                             <div class="form-group">
-                                <label for="destination">行き先</label>
+                                <label for="destination">目的地</label>
                                 <input type="text" class="form-control" name="destination" required>
                             </div>
                             <div class="form-group">
@@ -113,11 +113,16 @@
                                     </option>
                                 </select>
                             </div>
-                            <div class="form-check form-switch">
-                                <label class="form-check-label" for="pre_alcohol_check">運転前アルコールチェック</label>
-                                <div class="d-flex justify-content-end">
-                                <input type="checkbox" class="form-check-input" name="pre_alcohol_check" role="switch" value="false" required>
-                                </div>
+                            <div class="form-group">
+                                <label for="pre_alcohol_check">運転前アルコールチェック</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="pre_alcohol_check" value=true>
+                                <label class="form-check-label" for="pre_alcohol_check">確認済み</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="pre_alcohol_check" value=false checked>
+                                <label class="form-check-label" for="pre_alcohol_check">未確認</label>
                             </div>
                             <div class="form-group">
                                 <label for="post_alcohol_checker_id">運転後チェック担当者</label>
@@ -127,11 +132,16 @@
                                     </option>
                                 </select>
                             </div>
-                            <div class="form-check form-switch">
-                                <label class="form-check-label" for="post_alcohol_check">運転後アルコールチェック</label>
-                                <div class="d-flex justify-content-end">
-                                <input type="checkbox" class="form-check-input" name="post_alcohol_check" role="switch" value="false">
-                                </div>
+                            <div class="form-group">
+                                <label for="pre_alcohol_check">運転後アルコールチェック</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="post_alcohol_check" value=true>
+                                <label class="form-check-label" for="post_alcohol_check">確認済み</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="post_alcohol_check" value=false checked>
+                                <label class="form-check-label" for="post_alcohol_check">未確認</label>
                             </div>
                             <div class="form-group">
                                 <label for="update_program">更新プログラム</label>
@@ -157,39 +167,57 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <form>
+                    <form action="/drivinglog/update" method="POST">
+                        <input type="hidden" name="_token" :value="csrf">
+                        <input type="hidden" name="log_id" v-model="log_id">
+                        <div class="modal-body">
                             <div class="form-group">
-                                <label for="edit-driving-date">運転日</label>
-                                <input type="date" class="form-control" id="edit-driving-date" required>
+                                <label for="ride_time">乗車時間</label>
+                                <input type="datetime-local" class="form-control" name="departure_time" v-model="departure_time" required>
+                                <input type="datetime-local" class="form-control" name="arrival_time" v-model="arrival_time" required>
                             </div>
                             <div class="form-group">
-                                <label for="edit-destination">目的地</label>
-                                <input type="text" class="form-control" id="edit-destination" required>
+                                <label for="destination">目的地</label>
+                                <input type="text" class="form-control" name="destination" v-model="destination" required>
                             </div>
                             <div class="form-group">
-                                <label for="edit-departure-time">出発時間</label>
-                                <input type="time" class="form-control" id="edit-departure-time" required>
+                                <label for="meter">メーター 乗車時/帰社時</label>
+                                <input type="number" class="form-control" name="start_mileage" v-model="start_mileage" required>
+                                <input type="number" class="form-control" name="end_mileage" v-model="end_mileage" required>
                             </div>
                             <div class="form-group">
-                                <label for="edit-arrival-time">到着時間</label>
-                                <input type="time" class="form-control" id="edit-arrival-time" required>
+                                給油：<output id="output2">{{ fuel }}</output>
+                                <input type="range" name="fuel" min="1" max="100" step="1" oninput="document.getElementById('output2').value=this.value" v-model="fuel">
                             </div>
                             <div class="form-group">
-                                <label for="edit-start-mileage">運転開始時の走行距離</label>
-                                <input type="number" class="form-control" id="edit-start-mileage" required>
+                                <label for="post_alcohol_checker_id">運転後チェック担当者</label>
+                                <select class="form-select" name="post_alcohol_checker_id" v-model="post_alcohol_checker_id" required>
+                                    <option v-for="member in members" :value="member.user_id">
+                                        {{ member.user_name }}
+                                    </option>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label for="edit-end-mileage">運転終了時の走行距離</label>
-                                <input type="number" class="form-control" id="edit-end-mileage" required>
+                                <label for="pre_alcohol_check">運転後アルコールチェック</label>
                             </div>
-                            <!-- その他の項目もここにフォームを追加していく -->
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-                        <button type="button" class="btn btn-primary">保存</button>
-                    </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="post_alcohol_check" value=true v-model="post_alcohol_check">
+                                <label class="form-check-label" for="post_alcohol_check">確認済み</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="post_alcohol_check" value=false v-model="post_alcohol_check">
+                                <label class="form-check-label" for="post_alcohol_check">未確認</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="update_program">更新プログラム</label>
+                                <input type="text" class="form-control" name="update_program" v-model="update_program">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+                            <button type="submit" class="btn btn-primary">保存</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -206,6 +234,8 @@ export default {
             driving_date: '',
             car_id: '',
             car_type: '',
+            departure_time: '',
+            arrival_time: '',
             license_confirmation: '',
             destination: '',
             fuel: '',
@@ -223,7 +253,9 @@ export default {
                 this.log_id = null;
                 this.driving_date = null;
                 this.car_id = null;
-                this.car_type = null;                
+                this.car_type = null;
+                this.departure_time = null;
+                this.arrival_time = null;                
                 this.license_confirmation = null;
                 this.fuel = null;
                 this.destination = null;
@@ -236,17 +268,15 @@ export default {
                 this.update_program = null;
         },
         showEditModal(index) {
-            console.log("showEditModal:" + index);
             this.log_id = this.drivinglogs[index].log_id;
-            this.driving_date = this.drivinglogs[index].driving_date;
-            this.user_id = this.user[index].user_id;
-            this.user_name = this.user[index].user_name;
-            this.car_id = this.cars[index].car_id;
-            this.car_type = this.cars[index].car_type;
-            this.license_confirmation = this.drivinglogs[index].license_confirmation;
+            this.departure_time = this.drivinglogs[index].departure_time;
+            this.arrival_time = this.drivinglogs[index].arrival_time;
             this.destination = this.drivinglogs[index].destination;
-            this.pre_alcohol_checker_id = this.drivinglogs[index].pre_alcohol_checker_id;
+            this.fuel = this.drivinglogs[index].fuel;
+            this.start_mileage = this.drivinglogs[index].start_mileage;
+            this.end_mileage = this.drivinglogs[index].end_mileage;
             this.post_alcohol_checker_id = this.drivinglogs[index].post_alcohol_checker_id;
+            this.post_alcohol_check = this.drivinglogs[index].post_alcohol_check;
             this.update_program = this.drivinglogs[index].update_program;
         },
         submit(index) {

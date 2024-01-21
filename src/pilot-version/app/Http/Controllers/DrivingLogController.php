@@ -41,7 +41,7 @@ class DrivingLogController extends Controller
         $user = Auth::user();
         $drivinglogs->tenant_id = $user->tenant_id;
         $drivinglogs->log_id = (string)Str::uuid();
-        $drivinglogs->user_id = M_Users::select('user_id')->where('user_name', $request->user_name)->get();
+        $drivinglogs->user_id = $request->user_id;
         $drivinglogs->car_id = $request->car_id;
         $drivinglogs->driving_date = $request->driving_date;
         $drivinglogs->license_confirmation = $request->license_confirmation;
@@ -65,11 +65,14 @@ class DrivingLogController extends Controller
     {
         $user = Auth::user();
         T_Driving_Logs::where('log_id', $request->log_id)->update([
-            'department_id' => $request->department_id,
-            'car_type' => $request->car_type,
-            'number_plate' => $request->number_plate,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
+            'departure_time' => $request->departure_time,
+            'arrival_time' => $request->arrival_time,
+            'destination' => $request->destination,
+            'start_mileage' => $request->start_mileage,
+            'end_mileage' => $request->end_mileage,
+            'fuel' => $request->fuel,
+            'post_alcohol_checker_id' => $request->post_alcohol_checker_id,
+            'post_alcohol_check' => $request->post_alcohol_check,
             'updated_by' => $user->user_name,
             'update_program' => $request->update_program
         ]);
