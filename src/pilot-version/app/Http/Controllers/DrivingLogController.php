@@ -17,16 +17,16 @@ class DrivingLogController extends Controller
         $cars = M_Cars::all();
         $user = Auth::user();
         $members = M_Users::all();
-        $index = T_Driving_Logs::query();
+        //$index = T_Driving_Logs::query();
         $keyword = $request->input('keyword');
         if (!empty($keyword)) {
-            $drivinglogs = $index->where(function ($query) use ($keyword) {
-                $query->Where('driving_date', 'LIKE', "%{$keyword}%")
-                    ->orWhere('updated_at', 'LIKE', "%{$keyword}%")
-                    ->with(['m_users'])->whereHas('m_users', function ($q) use ($keyword) {
-                        $q->where('m_users.user_name', 'LIKE', "%{$keyword}%");
-                    });
-            })->get();
+            $drivinglogs = T_Driving_Logs::join('m_users', 'm_users.user_id', '=', 't_driving_logs.user_id')
+                ->join('m_cars', 'm_cars.car_id', '=', 't_driving_logs.car_id')
+                ->select('*', 't_driving_logs.created_at as created_at', 't_driving_logs.updated_at as updated_at')
+                ->where('user_name', 'LIKE', "%{$keyword}%")
+                ->orWhere('driving_date', 'LIKE', "%{$keyword}%")
+                ->orWhere('t_driving_logs.updated_at', 'LIKE', "%{$keyword}%")
+                ->get();
         } else {
             $drivinglogs = T_Driving_Logs::join('m_users', 'm_users.user_id', '=', 't_driving_logs.user_id')
                 ->join('m_cars', 'm_cars.car_id', '=', 't_driving_logs.car_id')
