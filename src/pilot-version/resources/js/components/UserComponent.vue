@@ -66,7 +66,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="user_name">ユーザー名</label>
-                                <input type="text" class="form-control" name="user_name" v-model="user_name" required>
+                                <input type="text" class="form-control" name="user_name" required>
                             </div>
                             <div class="form-group">
                                 <label for="email">メールアドレス</label>
