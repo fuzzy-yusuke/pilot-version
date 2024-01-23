@@ -51,6 +51,11 @@ class M_Users extends Authenticatable implements JWTSubject
         return $this->belongsTo(M_Tenants::class, 'tenant_id');
     }
 
+    public function t_driving_logs()
+    {
+        return $this->hasMany(T_Driving_Logs::class, 'user_id');
+    }
+
     /**
      * モデルの新しいUUIDの生成
      *
