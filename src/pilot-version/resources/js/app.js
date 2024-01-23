@@ -15,6 +15,7 @@ import Department from './components/DepartmentComponent.vue';
 import DrivingLog from './components/DrivingLogComponent.vue';
 // import PdfInput from './components/PdfInputComponent.vue';
 import User from './components/UserComponent.vue';
+import Tenant from './components/TenantComponent.vue';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -30,6 +31,7 @@ const app = createApp({
         "department-component" :Department,
         "drivinglog-component" :DrivingLog,
         "user-component" :User,
+        "tenant-component" :Tenant,
     }
 });
 
