@@ -23,8 +23,8 @@
                     <tr v-for="(drivinglog, index) in drivinglogs" :key="index">
                         <!-- 運転日報データのサンプル表示 -->
                         <td>{{ drivinglog.updated_at }}</td>
-                        <td>{{ drivinglog.user_id }}</td>
-                        <td>{{ drivinglog.car_id }}</td>
+                        <td>{{ drivinglog.user_name }}</td>
+                        <td>{{ drivinglog.car_type }}</td>
                         <td>{{ drivinglog.destination }}</td>
                         <td>{{ drivinglog.departure_time }}</td>
                         <td>{{ drivinglog.arrival_time }}</td>
@@ -280,7 +280,7 @@ export default {
             this.update_program = this.drivinglogs[index].update_program;
         },
         submit(index) {
-            const ans = confirm(this.drivinglogs[index].log_id + 'を削除しますか。');
+            const ans = confirm(this.drivinglogs[index].created_at + 'の日報を削除しますか。');
             if (!ans) event.preventDefault();
         }
     }
