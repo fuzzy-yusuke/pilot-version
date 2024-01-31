@@ -34,7 +34,7 @@
                         <div class="card-body">
                             <h5 class="card-title">テナント管理</h5>
                             <p class="card-text">テナントの管理が行えます。</p>
-                            <a href="tenans.html" class="btn btn-primary">テナント画面へ</a>
+                            <a :href="tenant" class="btn btn-primary">テナント画面へ</a>
                         </div>
                     </div>
                 </div>
@@ -44,6 +44,11 @@
 <script>
 export default {
     mounted() {
+    },
+    data() {
+        return {
+            tenant: '/admin/tenant',
+        }
     }
 };
 </script>
