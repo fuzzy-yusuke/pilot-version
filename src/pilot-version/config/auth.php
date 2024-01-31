@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'm_users',
     ],
 
     /*
@@ -38,7 +38,21 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'm_users',
+        ],
+        'admin-web' => [
+            'driver' => 'session',
+            'provider' => 'm_system_users',
+        ],
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'm_users',
+            'hash' => false,
+        ],
+        'admin-api' => [
+            'driver' => 'jwt',
+            'provider' => 'm_system_users',
+            'hash' => false,
         ],
     ],
 
@@ -60,9 +74,13 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'm_users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\M_Users::class,
+        ],
+        'm_system_users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\M_System_Users::class,
         ],
 
         // 'users' => [
@@ -87,8 +105,14 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'm_users' => [
+            'provider' => 'm_users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'm_system_users' => [
+            'provider' => 'm_system_users',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

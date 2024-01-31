@@ -11,9 +11,17 @@ const mix = require('laravel-mix');
  |
  */
  
-mix.js('resources/js/app.js', 'public/js')
+mix.js('resources/js/app.js', 'public/js').vue()
     .postCss('resources/css/app.css', 'public/css', [
         //
     ])
-    .vue()
+    .postCss('resources/css/dashboard.css', 'public/css', [
+        //
+    ])
+    .postCss('resources/css/header.css', 'public/css', [
+        //
+    ])
+    .postCss('resources/css/login_ex.css', 'public/css', [
+        //
+    ])
     .sass('resources/sass/app.scss', 'public/css');

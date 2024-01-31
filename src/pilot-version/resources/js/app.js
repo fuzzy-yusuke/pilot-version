@@ -4,8 +4,18 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import './bootstrap';
+require('./bootstrap');
+
 import { createApp } from 'vue';
+import Car from './components/CarComponent.vue';
+// import Contact from './components/ContactComponent.vue';
+import DashboardComponent from './components/DashboardComponent';
+import DashboardSystem from './components/DashboardSystemComponent.vue';
+import Department from './components/DepartmentComponent.vue';
+import DrivingLog from './components/DrivingLogComponent.vue';
+// import PdfInput from './components/PdfInputComponent.vue';
+import User from './components/UserComponent.vue';
+import Tenant from './components/TenantComponent.vue';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -13,10 +23,20 @@ import { createApp } from 'vue';
  * to use in your application's views. An example is included for you.
  */
 
-const app = createApp({});
+const app = createApp({
+    components: {
+        "dashboard-component":DashboardComponent,
+        "dashboardsystem-component":DashboardSystem,
+        "car-component":Car,
+        "department-component" :Department,
+        "drivinglog-component" :DrivingLog,
+        "user-component" :User,
+        "tenant-component" :Tenant,
+    }
+});
 
-import ExampleComponent from './components/ExampleComponent.vue';
-app.component('example-component', ExampleComponent);
+// import ExampleComponent from './components/ExampleComponent.vue';
+// app.component('example-component', ExampleComponent);
 
 /**
  * The following block of code may be used to automatically register your
